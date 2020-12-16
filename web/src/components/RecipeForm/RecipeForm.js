@@ -9,7 +9,7 @@ import {
 import EditorJs from '@editorjs/editorjs'
 
 const RecipeForm = (props) => {
-  const editor = new EditorJs()
+  const editor = new EditorJs({ data: JSON.parse(props.recipe.blocks) })
 
   const onSubmit = async (data) => {
     const editorData = await editor.save()

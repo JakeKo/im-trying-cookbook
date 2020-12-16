@@ -21,9 +21,9 @@ const truncate = (text) => {
   return output
 }
 
-const jsonTruncate = (obj) => {
-  return truncate(JSON.stringify(obj, null, 2))
-}
+// const jsonTruncate = (obj) => {
+//   return truncate(JSON.stringify(obj, null, 2))
+// }
 
 const timeTag = (datetime) => {
   return (
@@ -33,9 +33,9 @@ const timeTag = (datetime) => {
   )
 }
 
-const checkboxInputTag = (checked) => {
-  return <input type="checkbox" checked={checked} disabled />
-}
+// const checkboxInputTag = (checked) => {
+//   return <input type="checkbox" checked={checked} disabled />
+// }
 
 const RecipesList = ({ recipes }) => {
   const { addMessage } = useFlash()
@@ -65,7 +65,7 @@ const RecipesList = ({ recipes }) => {
             <th>Created at</th>
             <th>Updated at</th>
             <th>Title</th>
-            <th>Blocks</th>
+            {/* <th>Blocks</th> */}
             <th>&nbsp;</th>
           </tr>
         </thead>
@@ -76,7 +76,7 @@ const RecipesList = ({ recipes }) => {
               <td>{timeTag(recipe.createdAt)}</td>
               <td>{timeTag(recipe.updatedAt)}</td>
               <td>{truncate(recipe.title)}</td>
-              <td>{truncate(recipe.blocks)}</td>
+              {/* <td>{truncate(recipe.blocks)}</td> */}
               <td>
                 <nav className="rw-table-actions">
                   <Link

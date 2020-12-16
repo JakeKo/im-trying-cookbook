@@ -48,7 +48,6 @@ const Recipe = ({ recipe }) => {
   }
 
   const blocks = JSON.parse(recipe.blocks)
-  console.log(blocks)
   const editor = new EditorJs({
     readOnly: true,
     data: blocks,
