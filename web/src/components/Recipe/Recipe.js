@@ -1,7 +1,8 @@
 import { useMutation, useFlash } from '@redwoodjs/web'
 import { Link, routes, navigate } from '@redwoodjs/router'
+import EditorJs from '@editorjs/editorjs'
 
-import { QUERY } from 'src/components/RecipesCell'
+// import { QUERY } from 'src/components/RecipesCell'
 
 const DELETE_RECIPE_MUTATION = gql`
   mutation DeleteRecipeMutation($id: Int!) {
@@ -11,13 +12,13 @@ const DELETE_RECIPE_MUTATION = gql`
   }
 `
 
-const jsonDisplay = (obj) => {
-  return (
-    <pre>
-      <code>{JSON.stringify(obj, null, 2)}</code>
-    </pre>
-  )
-}
+// const jsonDisplay = (obj) => {
+//   return (
+//     <pre>
+//       <code>{JSON.stringify(obj, null, 2)}</code>
+//     </pre>
+//   )
+// }
 
 const timeTag = (datetime) => {
   return (
@@ -27,9 +28,9 @@ const timeTag = (datetime) => {
   )
 }
 
-const checkboxInputTag = (checked) => {
-  return <input type="checkbox" checked={checked} disabled />
-}
+// const checkboxInputTag = (checked) => {
+//   return <input type="checkbox" checked={checked} disabled />
+// }
 
 const Recipe = ({ recipe }) => {
   const { addMessage } = useFlash()
@@ -45,6 +46,13 @@ const Recipe = ({ recipe }) => {
       deleteRecipe({ variables: { id } })
     }
   }
+
+  const blocks = JSON.parse(recipe.blocks)
+  console.log(blocks)
+  const editor = new EditorJs({
+    readOnly: true,
+    data: blocks,
+  })
 
   return (
     <>
@@ -74,7 +82,9 @@ const Recipe = ({ recipe }) => {
             </tr>
             <tr>
               <th>Blocks</th>
-              <td>{recipe.blocks}</td>
+              <td>
+                <div id="editorjs" />
+              </td>
             </tr>
           </tbody>
         </table>
