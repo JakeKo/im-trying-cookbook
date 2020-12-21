@@ -24,7 +24,11 @@ const RecipeForm = (props) => {
     const onSubmit = async (data) => {
         const editorData = await editor.save();
         props.onSave(
-            { ...data, blocks: JSON.stringify(editorData) },
+            {
+                ...data,
+                updatedAt: new Date(),
+                blocks: JSON.stringify(editorData),
+            },
             props?.recipe?.id
         );
     };

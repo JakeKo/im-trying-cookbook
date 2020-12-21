@@ -14,13 +14,20 @@ const DELETE_RECIPE_MUTATION = gql`
     }
 `;
 
-const timeTag = (datetime) => {
-    return (
-        <time dateTime={datetime} title={datetime}>
-            {new Date(datetime).toUTCString()}
-        </time>
-    );
-};
+const months = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+];
 
 const Recipe = ({ recipe }) => {
     const { isAuthenticated } = useAuth();
@@ -49,42 +56,30 @@ const Recipe = ({ recipe }) => {
         },
     });
 
+    const createdDate = new Date(recipe.createdAt);
+    const updatedDate = new Date(recipe.updatedAt);
+
+    const createdDateString = `${createdDate.getDate()} ${
+        months[createdDate.getMonth()]
+    } ${createdDate.getFullYear()}`;
+    const updatedDateString = `${updatedDate.getDate()} ${
+        months[updatedDate.getMonth()]
+    } ${updatedDate.getFullYear()}`;
+
     return (
         <>
             <div className="rw-segment">
-                <header className="rw-segment-header">
-                    <h2 className="rw-heading rw-heading-secondary">
-                        Recipe Detail
-                    </h2>
-                </header>
-                <table className="rw-table">
-                    <tbody>
-                        {isAuthenticated && (
-                            <tr>
-                                <th>Id</th>
-                                <td>{recipe.id}</td>
-                            </tr>
+                <div>
+                    <div>#{recipe.id}</div>
+                    <div>{recipe.title}</div>
+                    <div>
+                        <span>Created on {createdDateString}</span>
+                        {recipe.updatedAt !== recipe.createdAt && (
+                            <span>, last modified on {updatedDateString}</span>
                         )}
-                        <tr>
-                            <th>Created at</th>
-                            <td>{timeTag(recipe.createdAt)}</td>
-                        </tr>
-                        <tr>
-                            <th>Updated at</th>
-                            <td>{timeTag(recipe.updatedAt)}</td>
-                        </tr>
-                        <tr>
-                            <th>Title</th>
-                            <td>{recipe.title}</td>
-                        </tr>
-                        <tr>
-                            <th>Blocks</th>
-                            <td>
-                                <div id="editorjs" />
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                    </div>
+                    <div id="editorjs" />
+                </div>
             </div>
             {isAuthenticated && (
                 <nav className="rw-button-group">
