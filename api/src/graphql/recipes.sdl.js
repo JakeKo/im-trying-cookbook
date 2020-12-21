@@ -19,7 +19,6 @@ export const schema = gql`
 
     input UpdateRecipeInput {
         title: String
-        updatedAt: DateTime
         blocks: String
     }
 

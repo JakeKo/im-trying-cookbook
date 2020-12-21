@@ -5,6 +5,7 @@ import Link from '@editorjs/link';
 import { useAuth } from '@redwoodjs/auth';
 import { Link as RouteLink, navigate, routes } from '@redwoodjs/router';
 import { useFlash, useMutation } from '@redwoodjs/web';
+import { formatDate } from 'src/util/date';
 
 const DELETE_RECIPE_MUTATION = gql`
     mutation DeleteRecipeMutation($id: Int!) {
@@ -13,21 +14,6 @@ const DELETE_RECIPE_MUTATION = gql`
         }
     }
 `;
-
-const months = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
-];
 
 const Recipe = ({ recipe }) => {
     const { isAuthenticated } = useAuth();
@@ -56,30 +42,20 @@ const Recipe = ({ recipe }) => {
         },
     });
 
-    const createdDate = new Date(recipe.createdAt);
-    const updatedDate = new Date(recipe.updatedAt);
-
-    const createdDateString = `${createdDate.getDate()} ${
-        months[createdDate.getMonth()]
-    } ${createdDate.getFullYear()}`;
-    const updatedDateString = `${updatedDate.getDate()} ${
-        months[updatedDate.getMonth()]
-    } ${updatedDate.getFullYear()}`;
-
     return (
         <>
-            <div className="rw-segment">
-                <div>
-                    <div>#{recipe.id}</div>
-                    <div>{recipe.title}</div>
-                    <div>
-                        <span>Created on {createdDateString}</span>
-                        {recipe.updatedAt !== recipe.createdAt && (
-                            <span>, last modified on {updatedDateString}</span>
-                        )}
-                    </div>
-                    <div id="editorjs" />
+            <div className="recipe">
+                <div className="recipe-dates">
+                    <span>Created: {formatDate(recipe.createdAt)}</span>
+                    {recipe.updatedAt !== recipe.createdAt && (
+                        <span> | Modified: {formatDate(recipe.updatedAt)}</span>
+                    )}
                 </div>
+                <div>
+                    <span className="recipe-id">#{recipe.id} </span>
+                    <span className="recipe-title">{recipe.title}</span>
+                </div>
+                <div className="recipe-blocks" id="editorjs" />
             </div>
             {isAuthenticated && (
                 <nav className="rw-button-group">
