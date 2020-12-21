@@ -17,12 +17,14 @@ const RecipesLayout = (props) => {
                         Recipes
                     </Link>
                 </h1>
-                <Link
-                    to={routes.newRecipe()}
-                    className="rw-button rw-button-green"
-                >
-                    <div className="rw-button-icon">+</div> New Recipe
-                </Link>
+                {isAuthenticated && (
+                    <Link
+                        to={routes.newRecipe()}
+                        className="rw-button rw-button-green"
+                    >
+                        <div className="rw-button-icon">+</div> New Recipe
+                    </Link>
+                )}
             </header>
             <main className="rw-main">{props.children}</main>
         </div>
