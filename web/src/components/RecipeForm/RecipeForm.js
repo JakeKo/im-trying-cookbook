@@ -1,17 +1,25 @@
+import EditorJs from '@editorjs/editorjs';
+import Header from '@editorjs/header';
+import Link from '@editorjs/link';
+import List from '@editorjs/list';
 import {
+    FieldError,
     Form,
     FormError,
-    FieldError,
     Label,
-    TextField,
     Submit,
+    TextField,
 } from '@redwoodjs/forms';
-import EditorJs from '@editorjs/editorjs';
 
 const RecipeForm = (props) => {
+    const tools = {
+        header: Header,
+        list: List,
+        link: Link,
+    };
     const editor = props.recipe
-        ? new EditorJs({ data: JSON.parse(props.recipe.blocks) })
-        : new EditorJs();
+        ? new EditorJs({ data: JSON.parse(props.recipe.blocks), tools })
+        : new EditorJs({ tools });
 
     const onSubmit = async (data) => {
         const editorData = await editor.save();

@@ -1,7 +1,10 @@
-import { useMutation, useFlash } from '@redwoodjs/web';
-import { Link, routes, navigate } from '@redwoodjs/router';
 import EditorJs from '@editorjs/editorjs';
+import Header from '@editorjs/header';
+import List from '@editorjs/list';
+import Link from '@editorjs/link';
 import { useAuth } from '@redwoodjs/auth';
+import { Link as RouteLink, navigate, routes } from '@redwoodjs/router';
+import { useFlash, useMutation } from '@redwoodjs/web';
 
 const DELETE_RECIPE_MUTATION = gql`
     mutation DeleteRecipeMutation($id: Int!) {
@@ -39,6 +42,11 @@ const Recipe = ({ recipe }) => {
     const editor = new EditorJs({
         readOnly: true,
         data: blocks,
+        tools: {
+            header: Header,
+            list: List,
+            link: Link,
+        },
     });
 
     return (
@@ -80,12 +88,12 @@ const Recipe = ({ recipe }) => {
             </div>
             {isAuthenticated && (
                 <nav className="rw-button-group">
-                    <Link
+                    <RouteLink
                         to={routes.editRecipe({ id: recipe.id })}
                         className="rw-button rw-button-blue"
                     >
                         Edit
-                    </Link>
+                    </RouteLink>
                     <a
                         href="#"
                         className="rw-button rw-button-red"
