@@ -7,18 +7,20 @@
 // 'src/pages/HomePage/HomePage.js'         -> HomePage
 // 'src/pages/Admin/BooksPage/BooksPage.js' -> AdminBooksPage
 
-import { Router, Route } from '@redwoodjs/router'
+import { Router, Route, Private } from '@redwoodjs/router';
 
 const Routes = () => {
-  return (
-    <Router>
-      <Route path="/recipes/new" page={NewRecipePage} name="newRecipe" />
-      <Route path="/recipes/{id:Int}/edit" page={EditRecipePage} name="editRecipe" />
-      <Route path="/recipes/{id:Int}" page={RecipePage} name="recipe" />
-      <Route path="/recipes" page={RecipesPage} name="recipes" />
-      <Route notfound page={NotFoundPage} />
-    </Router>
-  )
-}
+    return (
+        <Router>
+            <Route path="/recipes" page={RecipesPage} name="recipes" />
+            <Private unauthenticated="home">
+                <Route path="/recipes/{id:Int}" page={RecipePage} name="recipe" />
+                <Route path="/recipes/new" page={NewRecipePage} name="newRecipe" />
+                <Route path="/recipes/{id:Int}/edit" page={EditRecipePage} name="editRecipe" />
+            </Private>
+            <Route notfound page={NotFoundPage} />
+        </Router>
+    );
+};
 
-export default Routes
+export default Routes;
