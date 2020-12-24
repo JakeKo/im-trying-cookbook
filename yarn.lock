@@ -1178,6 +1178,11 @@
   resolved "https://registry.yarnpkg.com/@editorjs/list/-/list-1.6.1.tgz#1ca397bb687457ecc50c98a473338470a58d8df8"
   integrity sha512-9f24qApHmvUOq1tvAmwYS2dQIh1LGwsWJFVYNci0R4HIES848kmspfUS8p1ATJv2msogugeFDz1k3KQ5fZSCzw==
 
+"@editorjs/simple-image@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@editorjs/simple-image/-/simple-image-1.4.0.tgz#4c96a3304f3cf477ccb13de82f40d03bd42e6c0e"
+  integrity sha512-rARMYyTP7OUzf+YhrgUpXzc1yHhER6a9G8mxdnuSF0N9Kt8r1BGqe808YNs20TfMRpYgMXHvP9iiKGgooSPhmg==
+
 "@emotion/cache@^10.0.27":
   version "10.0.29"
   resolved "https://registry.yarnpkg.com/@emotion/cache/-/cache-10.0.29.tgz#87e7e64f412c060102d589fe7c6dc042e6f9d1e0"

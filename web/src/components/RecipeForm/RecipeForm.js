@@ -2,6 +2,7 @@ import EditorJs from '@editorjs/editorjs';
 import Header from '@editorjs/header';
 import Link from '@editorjs/link';
 import List from '@editorjs/list';
+import SimpleImage from '@editorjs/simple-image';
 import {
     FieldError,
     Form,
@@ -16,6 +17,7 @@ const RecipeForm = (props) => {
         header: Header,
         list: List,
         link: Link,
+        image: SimpleImage,
     };
     const editor = props.recipe
         ? new EditorJs({ data: JSON.parse(props.recipe.blocks), tools })

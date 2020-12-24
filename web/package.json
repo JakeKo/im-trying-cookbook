@@ -17,6 +17,7 @@
     "@editorjs/header": "^2.6.1",
     "@editorjs/link": "^2.3.1",
     "@editorjs/list": "^1.6.1",
+    "@editorjs/simple-image": "^1.4.0",
     "@redwoodjs/auth": "^0.21.0",
     "@redwoodjs/forms": "^0.21.0",
     "@redwoodjs/router": "^0.21.0",
