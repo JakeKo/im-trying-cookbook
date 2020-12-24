@@ -1,0 +1,49 @@
+.recipe {
+    width: 650px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+.recipe-id {
+    font-size: 64px;
+    color: grey;
+    font-weight: bold;
+}
+
+.recipe-title, .recipes-title {
+    font-size: 64px;
+    font-weight: bold;
+}
+
+.recipes-subtitle {
+    font-size: 18px;
+}
+
+.recipes-list {
+    margin-top: 48px;
+}
+
+.recipe-dates {
+    font-size: 16px;
+    font-style: italic;
+}
+
+.recipe-blocks {
+    margin-top: 64px;
+}
+
+.recipes-container {
+    width: 650px;
+    max-width: 100%;
+    margin: auto;
+}
+
+.recipes-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+    min-height: 48px;
+    margin-top: 4px 0;
+}
