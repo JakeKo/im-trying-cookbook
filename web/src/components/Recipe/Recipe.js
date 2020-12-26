@@ -1,12 +1,8 @@
-import EditorJs from '@editorjs/editorjs';
-import Header from '@editorjs/header';
-import Link from '@editorjs/link';
-import List from '@editorjs/list';
-import SimpleImage from '@editorjs/simple-image';
 import { useAuth } from '@redwoodjs/auth';
 import { Link as RouteLink, navigate, routes } from '@redwoodjs/router';
 import { useFlash, useMutation } from '@redwoodjs/web';
 import { formatDate } from 'src/util/date';
+import RecipeEditor from '../RecipeEditor/RecipeEditor';
 
 const DELETE_RECIPE_MUTATION = gql`
     mutation DeleteRecipeMutation($id: Int!) {
@@ -32,18 +28,6 @@ const Recipe = ({ recipe }) => {
         }
     };
 
-    const blocks = JSON.parse(recipe.blocks);
-    const editor = new EditorJs({
-        readOnly: true,
-        data: blocks,
-        tools: {
-            header: Header,
-            list: List,
-            link: Link,
-            image: SimpleImage,
-        },
-    });
-
     return (
         <>
             <div className="recipe">
@@ -57,7 +41,11 @@ const Recipe = ({ recipe }) => {
                     <span className="recipe-id">#{recipe.id} </span>
                     <span className="recipe-title">{recipe.title}</span>
                 </div>
-                <div className="recipe-blocks" id="editorjs" />
+                <RecipeEditor
+                    className="recipe-blocks"
+                    readOnly={true}
+                    blocks={JSON.parse(recipe.blocks)}
+                />
             </div>
             {isAuthenticated && (
                 <nav className="rw-button-group">

@@ -1,8 +1,3 @@
-import EditorJs from '@editorjs/editorjs';
-import Header from '@editorjs/header';
-import Link from '@editorjs/link';
-import List from '@editorjs/list';
-import SimpleImage from '@editorjs/simple-image';
 import {
     FieldError,
     Form,
@@ -11,22 +6,15 @@ import {
     Submit,
     TextField,
 } from '@redwoodjs/forms';
+import RecipeEditor from '../RecipeEditor/RecipeEditor';
 
 const RecipeForm = (props) => {
-    const tools = {
-        header: Header,
-        list: List,
-        link: Link,
-        image: SimpleImage,
-    };
-    const editor = props.recipe
-        ? new EditorJs({ data: JSON.parse(props.recipe.blocks), tools })
-        : new EditorJs({ tools });
+    let blocks = [];
+    const updateBlocks = (newBlocks) => (blocks = newBlocks);
 
     const onSubmit = async (data) => {
-        const editorData = await editor.save();
         props.onSave(
-            { ...data, blocks: JSON.stringify(editorData) },
+            { ...data, blocks: JSON.stringify(blocks) },
             props?.recipe?.id
         );
     };
@@ -57,7 +45,15 @@ const RecipeForm = (props) => {
                 />
                 <FieldError name="title" className="rw-field-error" />
 
-                <div id="editorjs" />
+                <RecipeEditor
+                    updateBlocks={updateBlocks}
+                    readOnly={false}
+                    blocks={
+                        props.recipe
+                            ? JSON.parse(props.recipe.blocks)
+                            : undefined
+                    }
+                />
 
                 <div className="rw-button-group">
                     <Submit
